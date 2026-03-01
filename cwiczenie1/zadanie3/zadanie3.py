@@ -1,13 +1,13 @@
 import cvxpy as cp
 
-# Zmienne:
+# zmienne:
 # x[0]: Lek I (1000 opakowań)
 # x[1]: Lek II (1000 opakowań)
 # x[2]: Surowiec I (kg)
 # x[3]: Surowiec II (kg)
 x = cp.Variable(4, nonneg=True)
 
-# Zmienne: Lek I, Lek II, Surowiec I, Surowiec II
+# zmienne: Lek I, Lek II, Surowiec I, Surowiec II
 cena_sprzedazy = [6500, 7100, 0, 0] @ x
 zawartosc_A = [-0.5, -0.6, 0.01, 0.02] @ x
 zasoby_ludzkie = [0.5, 0.6, 0, 0] @ x
@@ -25,14 +25,12 @@ ograniczenia = [
     zasoby_ludzkie <= 2000,
     zasoby_sprzetowe <= 800,
     x[2] + x[3] <= 1000,
-    zawartosc_A >= 0 # Musi być więcej czynnika A niż jest potrzebne do wyprodukowania leków
+    zawartosc_A >= 0 # musi być więcej czynnika A niż jest potrzebne do wyprodukowania leków
 ]
 
-# Solve
 problem = cp.Problem(cel, ograniczenia)
 problem.solve()
 
-# Results
 print(f"Status problemu: {problem.status}")
 print(f"Wartość optymalna: {problem.value:.2f} USD")
 print(f"Lek I: {x[0].value:.3f} (1000 opakowań)")

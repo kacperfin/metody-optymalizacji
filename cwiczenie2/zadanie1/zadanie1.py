@@ -1,10 +1,11 @@
-
+from pathlib import Path
 import cvxpy as cp
 import numpy as np
 import scipy.io as sio
 import matplotlib.pyplot as plt
 
-data = sio.loadmat('data/02-01.mat')
+script_dir = Path(__file__).parent
+data = sio.loadmat(script_dir.parent / 'isoPerimData.mat')
 
 N = int(data['N'][0, 0]) # liczba przedziałów
 a = float(data['a'][0, 0]) # koniec przedziału (początek to 0)
@@ -52,15 +53,8 @@ plt.xlabel('x/a', fontsize=12)
 plt.ylabel('y(x)', fontsize=12)
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.legend()
-plt.savefig('plots/02-01-maksymalizacja.png')
 
-'''
-Odpowiedzi
----
-Maksymalne pole
----
-2) 0.3483
-2a) 0.1745
-2b) 0.1890
-2c) 0.6016
-'''
+plots_dir = script_dir / 'wykresy'
+plots_dir.mkdir(exist_ok=True)
+
+plt.savefig(plots_dir / 'zadanie1-maksymalizacja.png')

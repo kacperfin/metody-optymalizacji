@@ -1,9 +1,12 @@
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.optimize import linprog
 
-data = pd.read_csv('data/01-04.csv', header=None)
+script_dir = Path(__file__).parent
+data = pd.read_csv(script_dir.parent / 'data01.csv', header=None)
+
 x = data[0].values
 y = data[1].values
 N = len(x)
@@ -51,7 +54,11 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.legend()
 plt.grid(True)
+
+plots_dir = script_dir / 'wykresy'
+plots_dir.mkdir(exist_ok=True)
+
 plt.ylim(-50, 150)
-plt.savefig('plots/01-04-001.png')
+plt.savefig(plots_dir / 'zadanie4-001.png')
 plt.ylim(-10, 15)
-plt.savefig('plots/01-04-002.png')
+plt.savefig(plots_dir / 'zadanie4-002.png')

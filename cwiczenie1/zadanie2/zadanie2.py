@@ -3,7 +3,7 @@ import cvxpy as cp
 # x1: płatki, x2: mleko, x3: chleb
 x = cp.Variable(3, nonneg=True)
 
-# Minimalizacja kosztu: 0.15*x1 + 0.25*x2 + 0.05*x3
+# minimalizacja kosztu: 0.15*x1 + 0.25*x2 + 0.05*x3
 koszt = [0.15, 0.25, 0.05] @ x
 cel = cp.Minimize(koszt)
 
@@ -17,7 +17,7 @@ ograniczenia = [
     witaminy >= 5000,
     witaminy <= 10000,
     cukier <= 1000,
-    x <= 10 # Maksymalnie 10 porcji każdego typu
+    x <= 10 # maksymalnie 10 porcji każdego typu
 ]
 
 cp.Problem(cel, ograniczenia).solve()
